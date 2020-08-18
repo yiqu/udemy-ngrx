@@ -3,8 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyBWgKOKv3hHf5VbkYNzf7VSJkApjOpsw2A",
+    authDomain: "udemy-angular-665a2.firebaseapp.com",
+    databaseURL: "https://udemy-angular-665a2.firebaseio.com",
+    projectId: "udemy-angular-665a2",
+    storageBucket: "udemy-angular-665a2.appspot.com",
+    messagingSenderId: "578777764146",
+    appId: "1:578777764146:web:45a80d6d3cb820b056072b",
+    measurementId: "G-TTX715GHT8"
+  },
+  entityName: "PLACEHOLDER",
+  gAnalytics: false
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

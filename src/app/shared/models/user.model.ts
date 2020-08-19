@@ -61,3 +61,34 @@ export class AuthEmailCredential {
   constructor(public email: string) {
   }
 }
+
+export class FireUser {
+  constructor(
+    private _displayName: string,
+    public email: string,
+    public localId: string,  //local id
+    public refreshToken: string,
+    public registered: boolean,
+    private _token: string,
+    public _tokenExpireDate: Date) {
+
+    }
+
+    get token(): string {
+      if (this._tokenExpireDate && this._tokenExpireDate > new Date()) {
+        return this._token;
+      }
+      return null;
+    }
+
+    get displayName(): string {
+      return this._displayName ? this._displayName : this.email;
+    }
+}
+
+export class FirebaseSignUpRestRequestBody {
+  constructor(public email: string, public password: string,
+    public returnSecureToken: boolean = true) {
+
+  }
+}

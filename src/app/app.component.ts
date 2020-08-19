@@ -3,7 +3,11 @@ import { Subject } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { IsMobileService } from './shared/services/is-mobile.service';
-
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
+import 'firebase/auth';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +28,7 @@ export class AppComponent {
 
 
   constructor(public media: MediaMatcher, public changeDetectorRef: ChangeDetectorRef,
-    private ims: IsMobileService) {
+    private ims: IsMobileService, public  as: AuthService) {
       this.setMobileDetection();
   }
 
@@ -50,4 +54,6 @@ export class AppComponent {
       this.sideNav.close();
     }
   }
+
+
 }

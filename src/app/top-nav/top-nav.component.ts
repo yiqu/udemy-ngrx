@@ -38,7 +38,7 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.animateLogoOnStart();
-
+    this.createMenuItems();
   }
 
 
@@ -70,8 +70,21 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (item.id === "signout") {
       //this.onSignoutClick();
     } else if (item.id === "signin") {
-      //this.onAuthClick();
+      this.onAuthClick();
     }
+  }
+
+  createMenuItems() {
+    this.userMenuItems = [];
+
+    this.userMenuItems.push(
+       new MenuItem("record_voice_over", "Sign in", "signin"),
+       new MenuItem("forward", "Sign Out", "signout")
+    )
+  }
+
+  onAuthClick() {
+    this.router.navigate(['/', 'auth']);
   }
 
 

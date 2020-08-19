@@ -11,6 +11,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducers } from './ngrx-stores/global-store/app.reducer';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +48,11 @@ import { ToastrModule } from 'ngx-toastr';
         warning: 'toast-warning'
       }
     }),
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 30
+    }),
+    //EffectsModule.forRoot(appEffects),
     AppRoutingModule,
   ],
 

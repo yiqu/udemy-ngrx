@@ -5,9 +5,15 @@ import { NetworkAwarePreloadStrategy } from './shared/preload-strategies/preload
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
+
   { path: 'home',
     loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
   },
+
+  { path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+
   { path: '**', component: NotFoundComponent}
 ];
 

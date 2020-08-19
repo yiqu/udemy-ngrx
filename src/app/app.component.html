@@ -10,8 +10,10 @@
       <app-side-nav (navClose)="onNavClose()"></app-side-nav>
     </mat-sidenav>
 
-    <mat-sidenav-content class="content">
-      <router-outlet></router-outlet>
+    <mat-sidenav-content>
+      <div class="min-100-vh">
+        <router-outlet></router-outlet>
+      </div>
 
       <mat-toolbar class="app-footer-no-stick">
         <div class="mr-3">{{footerTitle}}</div>

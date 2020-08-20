@@ -40,7 +40,6 @@ export class CoreComponent implements OnInit, OnDestroy {
     )
     .subscribe(
       (email: any) => {
-        console.log("user is ", email)
       }
     );
 
@@ -48,7 +47,6 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log(state)
       }
     );
   }

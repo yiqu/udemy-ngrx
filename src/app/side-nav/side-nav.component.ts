@@ -26,7 +26,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.headerList.push(
       new NavHeaderList(new NavHeader("NgRx Topics"), [
         new NavHeaderLink("Home", "assessment", ["/", "home"]),
-        new NavHeaderLink("Home", "assessment", ["/", "home1"]),
+        new NavHeaderLink("My Account", "account_circle", ["/", "account"]),
         new NavHeaderLink("Home", "assessment", ["/", "home2"]),
         new NavHeaderLink("Home", "assessment", ["/", "home3"]),
         new NavHeaderLink("Home", "assessment", ["/", "home4"]),

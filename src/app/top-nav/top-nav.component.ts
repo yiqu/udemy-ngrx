@@ -38,11 +38,11 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(public router: Router, public route: ActivatedRoute, private store: Store) {
 
-    this.store.select(fromAuthSelectors.getAuthUserSelector).pipe(
+    this.store.select(fromAuthSelectors.authEmailUppercaseSelector).pipe(
       takeUntil(this.compDest$)
      )
      .subscribe(
-       (email: FireUser) => {
+       (state: any) => {
        }
      );
   }

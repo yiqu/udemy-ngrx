@@ -4,6 +4,10 @@ import { Subject, timer } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { headShakeAnimation, rotateAnimation, tadaAnimation } from 'angular-animations';
 import { MenuItem } from '../shared/models/nav-item.model';
+import { Store } from '@ngrx/store';
+import * as fromAuthSelectors from '../auth/redux/auth.selectors';
+import { FireUser } from '../shared/models/user.model';
+
 
 const defaultProfileImg: string = "assets/banner/logo.png";
 
@@ -32,8 +36,15 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output()
   navToggle: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public router: Router, public route: ActivatedRoute) {
+  constructor(public router: Router, public route: ActivatedRoute, private store: Store) {
 
+    this.store.select(fromAuthSelectors.getAuthUserSelector).pipe(
+      takeUntil(this.compDest$)
+     )
+     .subscribe(
+       (email: FireUser) => {
+       }
+     );
   }
 
   ngOnInit() {

@@ -7,6 +7,8 @@ import { HttpResponse } from '@angular/common/http';
 import { FirebaseSignUpRestRequestBody, FireUser } from '../models/user.model';
 import { RestService } from './rest.service';
 import { catchError, tap } from 'rxjs/operators';
+import * as fromAuthActions from '../../auth/redux/auth.actions';
+import { Store } from '@ngrx/store';
 
 
 @Injectable({
@@ -18,7 +20,7 @@ export class AuthService {
   private baseSignInWithPasswordUrl: string = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword";
   private baseSignUpUrl: string = "https://identitytoolkit.googleapis.com/v1/accounts:signUp";
 
-  constructor(private rs: RestService) {
+  constructor(private rs: RestService, private store: Store) {
     this.initFirebase();
     firebase.auth().onAuthStateChanged(
       (user: firebase.User) => {
@@ -99,9 +101,10 @@ export class AuthService {
       info['refreshToken'],
       info['registered'],
       info['idToken'],
-      expireDate);
+      expireDate,
+      expireDateInSeconds);
 
-    console.log(info)
+    this.store.dispatch(fromAuthActions.authLoginSuccess({user: newUser}));
     this.saveInfoToLocalStorage(newUser);
   }
 

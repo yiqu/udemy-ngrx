@@ -15,7 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './ngrx-stores/global-store/app.reducer';
-
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { appReducers } from './ngrx-stores/global-store/app.reducer';
     HttpClientModule,
     TopNavModule,
     SideNavModule,
+    AuthModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       extendedTimeOut: 1000,

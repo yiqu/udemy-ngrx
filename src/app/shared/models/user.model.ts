@@ -70,7 +70,8 @@ export class FireUser {
     public refreshToken: string,
     public registered: boolean,
     private _token: string,
-    public _tokenExpireDate: Date) {
+    public _tokenExpireDate: Date,
+    public _tokenExpireDateInMilli: number) {
 
     }
 

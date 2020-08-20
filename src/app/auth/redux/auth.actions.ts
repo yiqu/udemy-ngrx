@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { FireUser } from 'src/app/shared/models/user.model';
 
 const LOGIN_START: string = "[Auth/Login] Auth Login Start";
 const LOGIN_SUCCESS: string = "[Auth/Login] Auth Login Success";
@@ -11,6 +12,7 @@ export const authLoginStart = createAction(
 
 export const authLoginSuccess = createAction(
   LOGIN_SUCCESS,
+  props<{user: FireUser}>()
 );
 
 export const authLoginFailure = createAction(

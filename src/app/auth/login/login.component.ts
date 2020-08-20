@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import * as fu from '../../shared/utils/form.utils';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
+import * as fromAuthActions from '../redux/auth.actions';
 
 @Component({
   selector: 'app-auth-login',
@@ -64,7 +64,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         const pw = this.passwordFc.value;
         this.as.signInUser(email, pw).subscribe(
           (res) => {
-            console.log(res)
+          },
+          (err) => {
+          },
+          () => {
           }
         )
       }

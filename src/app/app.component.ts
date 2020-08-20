@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -8,13 +8,16 @@ import 'firebase/analytics';
 import 'firebase/auth';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './shared/services/auth.service';
+import { Store } from '@ngrx/store';
+import * as fromAuthSelectors from './auth/redux/auth.selectors';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   footerTitle: string = "@KQ 2020";
   myUrl: string = "https://yiqu.github.io/";
@@ -28,7 +31,7 @@ export class AppComponent {
 
 
   constructor(public media: MediaMatcher, public changeDetectorRef: ChangeDetectorRef,
-    private ims: IsMobileService, public  as: AuthService) {
+    private ims: IsMobileService, public  as: AuthService, private store: Store) {
       this.setMobileDetection();
   }
 
@@ -53,6 +56,11 @@ export class AppComponent {
     if (this.sideNav) {
       this.sideNav.close();
     }
+  }
+
+  ngOnDestroy() {
+    this.compDest$.next();
+    this.compDest$.complete();
   }
 
 

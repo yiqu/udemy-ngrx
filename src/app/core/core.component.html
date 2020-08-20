@@ -5,5 +5,20 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-sm-12">
+      <ng-container *ngIf="(loggedinUser$ | async) as user; else noLoggedin">
+        Current logged-in user: {{user?.email}}
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template #noLoggedin>
+    <div class="row">
+      <div class="col-sm-12">
+        You have not logged in.
+      </div>
+    </div>
+  </ng-template>
 
 </div>

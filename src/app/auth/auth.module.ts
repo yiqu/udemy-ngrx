@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponentModule } from '../404/404.module';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuthReducer from './redux/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { authEffects } from './redux/auth.effects';
+
 
 @NgModule({
   imports: [
@@ -20,6 +23,7 @@ import * as fromAuthReducer from './redux/auth.reducer';
     LoadingSpinnerModule,
     NotFoundComponentModule,
     StoreModule.forFeature('auth', fromAuthReducer.authReducer),
+    EffectsModule.forFeature(authEffects),
     AuthRoutingModule
   ],
 

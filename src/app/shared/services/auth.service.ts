@@ -50,6 +50,7 @@ export class AuthService {
     }
   }
 
+
   handleFirebaseSignInUpError(errResponse) {
     console.log(errResponse)
     let errMessage: string = "An server error has occured.";
@@ -105,7 +106,6 @@ export class AuthService {
       expireDateInSeconds);
 
     this.store.dispatch(fromAuthActions.authLoginSuccess({user: newUser}));
-    this.saveInfoToLocalStorage(newUser);
   }
 
   saveInfoToLocalStorage(u: FireUser) {

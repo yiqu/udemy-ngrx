@@ -21,7 +21,7 @@ export class CoreComponent implements OnInit, OnDestroy {
   loggedinUser$: Observable<FireUser>;
   compDest$: Subject<any> = new Subject<any>();
 
-  constructor(private rs: RestService, private store: Store) {
+  constructor(private rs: RestService, private store: Store, private as: AuthService) {
   }
 
   ngOnInit() {
@@ -53,6 +53,17 @@ export class CoreComponent implements OnInit, OnDestroy {
 
   getAllTweets() {
     //this.rs.getData<Tweet[]>("tweets.json").subscribe((d)=>console.log(d))
+  }
+
+  onLogin() {
+    this.as.signInUser("test@test.com", "123456").subscribe(
+      (res) => {
+      },
+      (err) => {
+      },
+      () => {
+      }
+    )
   }
 
   ngOnDestroy() {

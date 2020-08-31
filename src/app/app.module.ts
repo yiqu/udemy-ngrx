@@ -18,10 +18,12 @@ import { appReducers, metaReducers } from './ngrx-stores/global-store/app.reduce
 import { AuthModule } from './auth/auth.module';
 import { appEffects } from './ngrx-stores/global-store/app.effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CoreWithResolverComponent } from './core-with-resolver/cwr.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CoreWithResolverComponent
   ],
 
   imports: [
@@ -64,10 +66,10 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreDevtoolsModule.instrument({
       maxAge: 30
     }),
-    StoreRouterConnectingModule.forRoot({
-      stateKey: "myRouter",
-      routerState: RouterState.Minimal
-    }),
+    // StoreRouterConnectingModule.forRoot({
+    //   stateKey: "myRouter",
+    //   routerState: RouterState.Minimal
+    // }),
     AppRoutingModule,
   ],
 

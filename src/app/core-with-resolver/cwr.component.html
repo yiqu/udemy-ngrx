@@ -1,0 +1,23 @@
+<div class="container-fluid min-100-vh">
+  <div class="row mt-3">
+    <div class="col-sm-12">
+      Using Resolver:
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      Tweets:
+    </div>
+  </div>
+
+  <ng-container *ngIf="(allTweets$ | async) as allTweets">
+    <ng-container *ngFor="let tweet of allTweets">
+      <div class="row">
+        <div class="col-sm-12">
+          {{tweet.userName}} said: {{tweet.content}}
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

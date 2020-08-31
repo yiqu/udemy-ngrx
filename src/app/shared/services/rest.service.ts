@@ -20,8 +20,6 @@ export class RestService {
 
   public refreshClick$: Subject<any> = new Subject<any>();
 
-  user$: BehaviorSubject<VerifiedUser> = new BehaviorSubject<VerifiedUser>(null);
-
   constructor(public http: HttpClient, public router: Router) {
   }
 
@@ -31,11 +29,8 @@ export class RestService {
 
   handleError(err: HttpErrorResponse) {
     const errMsg: any = err.error.error;
-    console.log(err.error.error)
-    if ((typeof errMsg === "string") && errMsg.includes("not parse auth")) {
-      this.user$.next(null);
-    }
-    return throwError(err);
+    console.log("error: ", err.error)
+    return throwError(errMsg);
   }
 
   postData<T>(url: string, data: any, params?: any): Observable<HttpResponse<T>> {
@@ -64,20 +59,30 @@ export class RestService {
       }
     }
     return this.http.get<T>(this.baseUrl + url, {observe: 'response', params: httpParams}).pipe(
-     // delay(2000),
-     map((res: HttpResponse<T>) => {
-      return res.body;
-     }),
-     catchError((err: HttpErrorResponse) => {
-       return this.handleError(err)
-      })
-    );
+      delay(1500),
+      map((res: HttpResponse<T>) => {
+        return res.body;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return this.handleError(err)
+        })
+      );
   }
 
   deleteData(tweetId: string) {
     const deleteUrl: string = "";
     return this.http.delete(this.baseUrl + deleteUrl, {observe: 'response'});
   }
+
+  convertObjToList(obj: object) {
+    let list = [];
+    Object.keys(obj).forEach((k) => {
+      list.push(obj[k]);
+    });
+    return list;
+  }
+
+
 
 
   handleFirebaseSignInUpError(errResponse) {

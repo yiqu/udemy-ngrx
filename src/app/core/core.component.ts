@@ -8,6 +8,11 @@ import * as fromAuthSelectors from '../auth/redux/auth.selectors';
 import { FireUser } from '../shared/models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TweetsService } from '../shared/services/tweets.service';
+import * as fromTweetSelectors from '../ngrx-stores/tweets/tweets.selector';
+import * as fromTweetEntitySelectors from '../ngrx-stores/tweets/tweets-entity.selector';
+import { EntityState } from '@ngrx/entity';
+
 
 @Component({
   selector: 'app-core',
@@ -18,52 +23,73 @@ export class CoreComponent implements OnInit, OnDestroy {
 
   title: string = "All Tweets";
   allTweets: Tweet;
-  loggedinUser$: Observable<FireUser>;
   compDest$: Subject<any> = new Subject<any>();
 
-  constructor(private rs: RestService, private store: Store, private as: AuthService) {
+  loggedinUser$: Observable<FireUser> = this.store.select(fromAuthSelectors.getAuthUserSelector);
+
+  tweetsLoading$: Observable<boolean> = this.store.select(fromTweetEntitySelectors.getLoadingSelector);
+  allTweets$: Observable<Tweet[]> = this.store.select(fromTweetEntitySelectors.getAllTweetsSelector);
+
+  tweetError$: Observable<boolean> = this.store.select(fromTweetEntitySelectors.getErrorSelector);
+  tweetErrorMsg$: Observable<string> = this.store.select(fromTweetEntitySelectors.getErrorMsgSelector);
+
+  constructor(private rs: RestService, private store: Store, private as: AuthService,
+    private ts: TweetsService) {
+
   }
 
   ngOnInit() {
     this.getAllTweets();
 
-    /**
-     * Using feature selector to create a obs for async pipe usage
-     */
-    this.loggedinUser$ = this.store.select(fromAuthSelectors.getAuthUserSelector);
-
-    /**
-     * Using feature selector to grab the Auth User slice
-     */
-    this.store.select(fromAuthSelectors.getAuthUserEmailSelector).pipe(
-     // takeUntil(this.compDest$)
+    this.store.select(fromTweetEntitySelectors.getAllTweetsSelector).pipe(
+      takeUntil(this.compDest$)
     )
     .subscribe(
-      (email: any) => {
+      (state) => {
+        console.log("All: ",state)
       }
-    );
+    )
 
-    this.store.pipe(
+    this.store.select(fromTweetEntitySelectors.getAllTweetsEntitiesSelector).pipe(
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
+        console.log("Entities:",state)
       }
-    );
+    )
+
+    this.store.select(fromTweetEntitySelectors.getAllTweetsIdsSelector).pipe(
+      takeUntil(this.compDest$)
+    ).subscribe(
+      (state) => {
+        console.log("Ids ",state)
+      }
+    )
+
+    this.store.select(fromTweetEntitySelectors.getAllTweetsTotalSelector).pipe(
+      takeUntil(this.compDest$)
+    ).subscribe(
+      (state) => {
+        console.log("Total", state)
+      }
+    )
+
+    this.store.select(fromTweetEntitySelectors.getTweetsBy, {nameToFilter: 'gg'}).pipe(
+      takeUntil(this.compDest$)
+    ).subscribe(
+      (state) => {
+        console.log("Filter tweet by name:", state)
+      }
+    )
+
+  }
+
+  refreshTweets() {
+    this.getAllTweets();
   }
 
   getAllTweets() {
-    //this.rs.getData<Tweet[]>("tweets.json").subscribe((d)=>console.log(d))
-  }
-
-  onLogin() {
-    this.as.signInUser("test@test.com", "123456").subscribe(
-      (res) => {
-      },
-      (err) => {
-      },
-      () => {
-      }
-    )
+    this.ts.getAllTweets();
   }
 
   ngOnDestroy() {

@@ -23,26 +23,66 @@
   </ng-template>
 
   <hr>
+  <div class="row">
+    <div class="col-sm-3">
+      {{composeTitle}}
+      <div [formGroup]="tweetFg">
+        <mat-form-field class="example-form-field">
+          <mat-label>Your name</mat-label>
+          <input matInput type="text" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+          <mat-label>Say something...</mat-label>
+          <input matInput type="text" formControlName="tweet">
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" (click)="postTweet()" [disabled]="!this.tweetFg.valid">Post</button>
+        </div>
+      </div>
+    </div>
 
-  <ng-container *ngIf="(tweetsLoading$ | async) as isTweetsLoading; else tweetLoaded">
-    Loading your tweets...
-  </ng-container>
-  <ng-template #tweetLoaded>
-    <ng-container *ngIf="(tweetError$ | async); else noError">
-      Error occured: {{tweetErrorMsg$ | async}}
-    </ng-container>
-    <ng-template #noError>
-      <ng-container *ngIf="(allTweets$ | async) as allTweets">
-        <ng-container *ngFor="let tweet of allTweets">
-          <div class="row">
-            <div class="col-sm-12">
-              {{tweet.userName}} said: {{tweet.content}}
-            </div>
-          </div>
-        </ng-container>
+    <div class="col-sm-3">
+      <div>
+        Sorted by name (using the default sort fn supplied)
+      </div>
+      <ng-container *ngIf="(tweetsLoading$ | async) as isTweetsLoading; else tweetLoaded">
+        Loading your tweets...
       </ng-container>
-    </ng-template>
-  </ng-template>
+      <ng-template #tweetLoaded>
+        <ng-container *ngIf="(tweetError$ | async); else noError">
+          Error occured: {{tweetErrorMsg$ | async}}
+        </ng-container>
+        <ng-template #noError>
+          <ng-container *ngIf="(allTweets$ | async) as allTweets">
+            <ng-container *ngFor="let tweet of allTweets">
+              <div class="row mb-2">
+                <div class="col-sm-12">
+                  {{tweet.userName}} said: {{tweet.content}}
+                  <button mat-raised-button color="primary" (click)="editTweet(tweet)">Edit</button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </ng-template>
+    </div>
 
+    <div class="col-sm-3" *ngIf="editing">
+      Edit tweet
+      <div [formGroup]="editTweetFg">
+        <mat-form-field class="example-form-field">
+          <mat-label>Your name</mat-label>
+          <input matInput type="text" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+          <mat-label>Say something...</mat-label>
+          <input matInput type="text" formControlName="tweet">
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" (click)="submitEdit()" [disabled]="!this.editTweetFg.valid">Post</button>
+        </div>
+      </div>
+    </div>
 
+  </div>
 </div>

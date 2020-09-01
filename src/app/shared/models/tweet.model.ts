@@ -3,7 +3,7 @@ export class Tweet {
     public content: string,
     public date: number = 0,
     public id: string = null,
-    public status: TweetStatus) {
+    public status?: TweetStatus) {
 
   }
 }

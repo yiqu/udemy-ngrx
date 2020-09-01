@@ -7,6 +7,10 @@ import { Tweet } from 'src/app/shared/models/tweet.model';
 
 export const getTweetFeatureStateSelector = createFeatureSelector<TweetEntityState>('tweets');
 
+
+/**
+ * The adapter built-in selectors, selectAll, selectIds, selectEntities, selectTotal
+ */
 export const getAllTweetsSelector = createSelector(
   getTweetFeatureStateSelector,
   fromTweetReducers.adapter.getSelectors().selectAll
@@ -27,6 +31,8 @@ export const getAllTweetsTotalSelector = createSelector(
   fromTweetReducers.adapter.getSelectors().selectTotal
 );
 
+
+
 // passing in a value with the props parameter
 export const getTweetsBy = createSelector(
   getAllTweetsSelector,
@@ -37,6 +43,24 @@ export const getTweetsBy = createSelector(
   }
 )
 
+export const selectEntity = (id: string) => createSelector(
+  getAllTweetsEntitiesSelector,
+  (entities) => {
+    return entities[id];
+  }
+);
+
+export const selectEntitiesByID = (ids: string[]) => createSelector(
+  getAllTweetsEntitiesSelector,
+  entities => {
+    return ids.map(id => entities[id]);
+  }
+);
+
+
+/**
+ * Normal selectors
+ */
 export const getLoadingSelector = createSelector(
   getTweetFeatureStateSelector,
   (state) => {

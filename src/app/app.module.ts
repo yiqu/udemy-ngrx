@@ -66,10 +66,10 @@ import { CoreWithResolverComponent } from './core-with-resolver/cwr.component';
     StoreDevtoolsModule.instrument({
       maxAge: 30
     }),
-    // StoreRouterConnectingModule.forRoot({
-    //   stateKey: "myRouter",
-    //   routerState: RouterState.Minimal
-    // }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: "myRouter",
+      routerState: RouterState.Minimal
+    }),
     AppRoutingModule,
   ],
 

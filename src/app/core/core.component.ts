@@ -58,7 +58,7 @@ export class CoreComponent implements OnInit, OnDestroy {
     )
     .subscribe(
       (state) => {
-        console.log("All: ",state)
+        //console.log("All: ",state)
       }
     )
 
@@ -66,7 +66,7 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log("Entities:",state)
+       // console.log("Entities:",state)
       }
     )
 
@@ -74,7 +74,7 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log("Ids ",state)
+       // console.log("Ids ",state)
       }
     )
 
@@ -82,7 +82,7 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log("Total", state)
+        //console.log("Total", state)
       }
     )
 
@@ -90,7 +90,7 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log("Filter tweet by name:", state)
+       //console.log("Filter tweet by name:", state)
       }
     );
 
@@ -99,7 +99,7 @@ export class CoreComponent implements OnInit, OnDestroy {
       takeUntil(this.compDest$)
     ).subscribe(
       (state) => {
-        console.log("Entity of -M52fZohiACwgDDfwuqQ ", state)
+        //console.log("Entity of -M52fZohiACwgDDfwuqQ ", state)
       }
     )
 

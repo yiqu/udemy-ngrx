@@ -24,11 +24,11 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   createAllOptions() {
     this.headerList.push(
-      new NavHeaderList(new NavHeader("NgRx Topics"), [
-        new NavHeaderLink("Home", "assessment", ["/", "home"]),
+      new NavHeaderList(new NavHeader("NgRx Sections"), [
+        new NavHeaderLink("Twitter", "chat", ["/", "twitter"]),
         new NavHeaderLink("My Account", "account_circle", ["/", "account"]),
         new NavHeaderLink("Tweets with Resolver", "assessment", ["/", "home2"]),
-        new NavHeaderLink("Home", "assessment", ["/", "home3"]),
+        new NavHeaderLink("Practice", "assessment", ["/", "home"]),
         new NavHeaderLink("Home", "assessment", ["/", "home4"]),
         new NavHeaderLink("Home", "assessment", ["/", "home5"]),
         new NavHeaderLink("Home", "assessment", ["/", "home6"]),

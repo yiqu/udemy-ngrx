@@ -2,7 +2,7 @@ import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { FireUser } from '../../shared/models/user.model';
 import * as fromHealthReducer from '../health/health.reducer';
 import { HealthState } from '../health/health.model';
-import { routerReducer, RouterReducerState } from '@ngrx/router-store';
+import * as fromNgRxRouter from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { TweetState } from '../tweets/tweets.model';
 import * as fromTweetReducer from '../tweets/tweets.reducer';
@@ -15,14 +15,13 @@ import { Tweet } from 'src/app/shared/models/tweet.model';
  */
 export interface AppState {
   health: HealthState,
-  //myRouter: RouterReducerState,
+  myRouter: fromNgRxRouter.RouterReducerState,
   tweets: EntityState<Tweet>
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   health: fromHealthReducer.healthReducer,
-  //myRouter: routerReducer,
-  //tweets: fromTweetReducer.tweetReducer
+  myRouter: fromNgRxRouter.routerReducer,
   tweets: fromTweetEntityReducer.tweetsEntityReducer
 }
 

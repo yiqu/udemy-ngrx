@@ -5,7 +5,9 @@ import * as fromAppState from '../global-store/app.reducer';
 export const routerStateSelector =
   createFeatureSelector<fromAppState.AppState, fromRouter.RouterReducerState<any>>('myRouter');
 
-
+/**
+ * These built in selectors are for use IF YOU DID NOT CREATE YOUR OWN SERIALIZER
+ */
 export const {
   selectCurrentRoute,   // select the current route
   selectFragment,       // select the current route fragment

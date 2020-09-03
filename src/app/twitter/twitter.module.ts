@@ -3,7 +3,11 @@ import { TwitterComponent } from './twitter.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModuleBundle } from '../shared/material-bundle.module';
-
+import { TwitterRoutingModule } from './twitter-routing.module';
+import { TwitterCoreComponent } from './core/core.component';
+import { TweetDetailComponent } from './tweet-detail/detail.component';
+import { TweetDisplayComponent } from './tweet-display/display.component';
+import { PipeBundleModule } from '../shared/pipes/pipe-bundle.module';
 
 @NgModule({
 
@@ -11,7 +15,9 @@ import { MaterialModuleBundle } from '../shared/material-bundle.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModuleBundle
+    MaterialModuleBundle,
+    PipeBundleModule,
+    TwitterRoutingModule
   ],
 
   exports: [
@@ -19,10 +25,15 @@ import { MaterialModuleBundle } from '../shared/material-bundle.module';
   ],
 
   declarations: [
-    TwitterComponent
+    TwitterComponent,
+    TwitterCoreComponent,
+    TweetDetailComponent,
+    TweetDisplayComponent
   ],
 
-  providers: [],
+  providers: [
+
+  ],
 
 })
 export class TwitterModule { }

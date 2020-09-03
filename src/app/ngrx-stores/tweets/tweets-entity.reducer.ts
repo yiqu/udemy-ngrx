@@ -37,7 +37,7 @@ export function selectTweetId(t: Tweet): string {
 }
 
 export function sortByAuthorName(a: Tweet, b: Tweet): number {
-  if (a.userName > b.userName) {
+  if (a.date < b.date) {
     return 1;
   }
   return -1;
@@ -102,11 +102,11 @@ export const tweetsEntityReducer = createReducer(
 
   on(TweetActions.getAllTweetsSuccess, (state, { allTweets }) => {
     const dateTime = new Date().getTime();
-
     return adapter.setAll(allTweets, {
       ...state,
       loading: false,
       error: false,
+      errorMsg: null,
       lastUpdated: dateTime
     });
   }),

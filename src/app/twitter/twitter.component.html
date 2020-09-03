@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row text-center my-3">
+    <div class="col-sm-12 tfont title">
+      <a [routerLink]="['/', 'twitter']">
+        {{title}}
+      </a>
+    </div>
+  </div>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="tb-icon" (click)="onGoToAll()">
+      <mat-icon>view_list</mat-icon>
+    </button>
+    <button mat-icon-button class="tb-icon" (click)="onNewTweet()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+</div>

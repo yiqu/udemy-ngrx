@@ -19,6 +19,8 @@ import { AuthModule } from './auth/auth.module';
 import { appEffects } from './ngrx-stores/global-store/app.effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CoreWithResolverComponent } from './core-with-resolver/cwr.component';
+import * as fromRouteSerializer from './ngrx-stores/router/router-serializer';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { CoreWithResolverComponent } from './core-with-resolver/cwr.component';
     }),
     StoreRouterConnectingModule.forRoot({
       stateKey: "myRouter",
-      routerState: RouterState.Minimal
+      routerState: RouterState.Minimal,
+      //serializer: fromRouteSerializer.CustomRouteStateSerializer
     }),
     AppRoutingModule,
   ],

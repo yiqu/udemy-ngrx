@@ -3,10 +3,10 @@ import { TweetState } from './tweets.model';
 import * as fromTweetReducers from './tweets-entity.reducer';
 import { TweetEntityState } from './tweets-entity.reducer';
 import { Tweet } from 'src/app/shared/models/tweet.model';
+import * as fromRouterSelectors from '../router/router.selectors';
 
 
 export const getTweetFeatureStateSelector = createFeatureSelector<TweetEntityState>('tweets');
-
 
 /**
  * The adapter built-in selectors, selectAll, selectIds, selectEntities, selectTotal
@@ -57,6 +57,15 @@ export const selectEntitiesByID = (ids: string[]) => createSelector(
   }
 );
 
+export const getTweetByRouteParam = (id: string) => createSelector(
+  getAllTweetsEntitiesSelector,
+  fromRouterSelectors.selectRouteParam(id),
+  (entities, tweetId: string): Tweet => {
+    return entities[tweetId];
+  }
+
+)
+
 
 /**
  * Normal selectors
@@ -81,3 +90,4 @@ export const getErrorMsgSelector = createSelector(
     return state.errorMsg;
   }
 )
+

@@ -1,0 +1,18 @@
+<div class="row my-3 text-center">
+  <div class="col-sm-12 tfont">
+    Tweet Wall
+  </div>
+</div>
+
+<ng-container *ngIf="(this.ts.allTweets$ | async) as tweets">
+  <ng-container *ngIf="tweets.length < 1">
+    <div class="row text-center">
+      <div class="col-sm-12">
+        There no tweets yet, post one instead!
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngFor="let tweet of tweets">
+    <app-twitter-tweet-display [tweetData]="tweet" (tweetEdit)="onEditTweet($event)"></app-twitter-tweet-display>
+  </ng-container>
+</ng-container>

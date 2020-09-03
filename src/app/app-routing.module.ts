@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
   },
 
+  { path: 'twitter',
+    loadChildren: () => import('./twitter/twitter.module').then(m => m.TwitterModule)
+  },
+
   { path: 'home2', component: CoreWithResolverComponent, resolve: {tweets: TweetsResolver} },
 
   { path: 'account',

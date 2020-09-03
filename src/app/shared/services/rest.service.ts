@@ -42,7 +42,7 @@ export class RestService {
       }
     }
     return this.http.post<T>(urlPost, data, {observe: 'response', params: httpParams}).pipe(
-      //delay(2000),
+      delay(1500),
       catchError((err: HttpErrorResponse) => this.handleError(err))
     );
   }

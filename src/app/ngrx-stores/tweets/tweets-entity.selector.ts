@@ -52,7 +52,7 @@ export const selectEntity = (id: string) => createSelector(
 
 export const selectEntitiesByID = (ids: string[]) => createSelector(
   getAllTweetsEntitiesSelector,
-  entities => {
+  (entities) => {
     return ids.map(id => entities[id]);
   }
 );
@@ -63,7 +63,6 @@ export const getTweetByRouteParam = (id: string) => createSelector(
   (entities, tweetId: string): Tweet => {
     return entities[tweetId];
   }
-
 )
 
 
@@ -72,22 +71,60 @@ export const getTweetByRouteParam = (id: string) => createSelector(
  */
 export const getLoadingSelector = createSelector(
   getTweetFeatureStateSelector,
-  (state) => {
+  (state): boolean => {
     return state.loading;
+  }
+)
+
+export const getHasDataLoadedAlreadySelector = createSelector(
+  getTweetFeatureStateSelector,
+  (state): boolean => {
+    return state.hasDataLoadedAlready;
   }
 )
 
 export const getErrorSelector = createSelector(
   getTweetFeatureStateSelector,
-  (state) => {
+  (state): boolean => {
     return state.error;
   }
 )
 
 export const getErrorMsgSelector = createSelector(
   getTweetFeatureStateSelector,
-  (state) => {
+  (state): string => {
     return state.errorMsg;
   }
 )
 
+export const getLastUpdatedSelector = createSelector(
+  getTweetFeatureStateSelector,
+  (state): number => {
+    return state.lastUpdated;
+  }
+)
+
+export const getAddingNewTweetLoadingSelector = createSelector(
+  getTweetFeatureStateSelector,
+  (state): boolean => {
+    return state.addingNewTweet;
+  }
+)
+
+export const getLastTimeTweetDialogClosedSelector = createSelector(
+  getTweetFeatureStateSelector,
+  (state): number => {
+    return state.closeTweetDialogTime;
+  }
+)
+
+export const showLoadMaskSelector = createSelector(
+  getHasDataLoadedAlreadySelector,
+  getLoadingSelector,
+  (hasDataLoaded: boolean, loadingStatus: boolean) => {
+    if (hasDataLoaded) {
+      return false;
+    }
+    return loadingStatus;
+  }
+)

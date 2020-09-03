@@ -5,7 +5,6 @@ import { HealthState } from '../health/health.model';
 import * as fromNgRxRouter from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { TweetState } from '../tweets/tweets.model';
-import * as fromTweetReducer from '../tweets/tweets.reducer';
 import * as fromTweetEntityReducer from '../tweets/tweets-entity.reducer';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { Tweet } from 'src/app/shared/models/tweet.model';

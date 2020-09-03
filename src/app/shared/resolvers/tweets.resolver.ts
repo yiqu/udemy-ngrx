@@ -3,7 +3,6 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs';
 import { Tweet } from '../models/tweet.model';
 import { Store } from '@ngrx/store';
-import * as fromTweetSelectors from '../../ngrx-stores/tweets/tweets.selector';
 import { first, tap } from 'rxjs/operators';
 import * as fromTweetActions from '../../ngrx-stores/tweets/tweets.actions';
 

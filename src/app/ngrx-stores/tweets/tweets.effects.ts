@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable()
 export class TweetEffects {
 
+  private baseUrl: string = "https://udemy-angular-665a2.firebaseio.com/tweets/";
 
   constructor(public actions$: Actions, private rs: RestService, private _snackBar: MatSnackBar) {
   }
@@ -59,7 +60,7 @@ export class TweetEffects {
 
   getAllTweetsFailed$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(fromTweetActions.getAllTweetsFailed),
+      ofType(fromTweetActions.getAllTweetsFailed, fromTweetActions.postTweetFailed),
       tap((err) => {
         const msg = err.errorMsg;
         this._snackBar.open(msg, "close", {
@@ -81,6 +82,38 @@ export class TweetEffects {
       })
     );
   }, {dispatch: false});
+
+
+  postNewTweetStart$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromTweetActions.postTweetStart),
+      switchMap((data) => {
+        let t: Tweet = {...data.tweetToPost};
+        const generatedId: string = (new Date().getTime() + (Math.random()+"").slice(-7)).slice(-10);
+        t.id = generatedId;
+        const url: string = this.baseUrl + ".json";
+        return this.rs.postData(url, t).pipe(
+          map((res) => {
+            return fromTweetActions.postTweetSuccess({tweetPosted: t});
+          }),
+          catchError((errResponse: string) => {
+            return of(fromTweetActions.postTweetFailed({errorMsg: errResponse}));
+          }),
+        );
+      })
+    );
+  });
+
+  postNewTweetSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromTweetActions.postTweetSuccess),
+      switchMap((res) => {
+        return [
+          fromTweetActions.resetCloseDialogTime(),
+          fromTweetActions.getAllTweetsStart()
+        ];
+      }));
+  });
 
 }
 

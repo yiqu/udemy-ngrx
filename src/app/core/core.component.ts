@@ -9,7 +9,6 @@ import { FireUser } from '../shared/models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TweetsService } from '../shared/services/tweets.service';
-import * as fromTweetSelectors from '../ngrx-stores/tweets/tweets.selector';
 import * as fromTweetEntitySelectors from '../ngrx-stores/tweets/tweets-entity.selector';
 import { EntityState, Update } from '@ngrx/entity';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

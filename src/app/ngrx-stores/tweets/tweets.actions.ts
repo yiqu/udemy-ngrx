@@ -3,17 +3,19 @@ import { Tweet } from '../../shared/models/tweet.model';
 import { Update } from '@ngrx/entity';
 
 
-const GET_ALL_TWEETS_START: string = "[Tweets] Get All Tweets Start";
-const GET_ALL_TWEETS_FAILED: string = "[Tweets] Get All Tweets Failed";
-const GET_ALL_TWEETS_SUCCESS: string = "[Tweets] Get All Tweets Success";
+const GET_ALL_TWEETS_START: string = "[Tweets/API] Get All Tweets Start";
+const GET_ALL_TWEETS_FAILED: string = "[Tweets/API] Get All Tweets Failed";
+const GET_ALL_TWEETS_SUCCESS: string = "[Tweets/API] Get All Tweets Success";
 
-const POST_TWEET_START: string = "[Tweets] POST TWEET START";
-const POST_TWEET_FAILED: string = "[Tweets] POST TWEET FAILED";
-const POST_TWEET_SUCCESS: string = "[Tweets] POST TWEET SUCCESS";
+const POST_TWEET_START: string = "[Tweets/API] POST NEW TWEET START";
+const POST_TWEET_FAILED: string = "[Tweets/API] POST NEW TWEET FAILED";
+const POST_TWEET_SUCCESS: string = "[Tweets/API] POST NEW TWEET SUCCESS";
 
-const EDIT_TWEET_START: string = "[Tweets] EDIT TWEET START";
-const EDIT_TWEET_FAILED: string = "[Tweets] EDIT TWEET FAILED";
-const EDIT_TWEET_SUCCESS: string = "[Tweets] EDIT TWEET SUCCESS";
+const EDIT_TWEET_START: string = "[Tweets/API] EDIT TWEET START";
+const EDIT_TWEET_FAILED: string = "[Tweets/API] EDIT TWEET FAILED";
+const EDIT_TWEET_SUCCESS: string = "[Tweets/API] EDIT TWEET SUCCESS";
+
+const RESRT_CLOSE_NEW_TWEET_DIALOG: string = "[Tweets/UI] Reset Close New Tweet Dialog";
 
 export const getAllTweetsStart = createAction(
   GET_ALL_TWEETS_START,
@@ -59,3 +61,8 @@ export const editTweetSuccess = createAction(
   EDIT_TWEET_SUCCESS,
   props<{tweetEdited: Tweet}>()
 );
+
+export const resetCloseDialogTime = createAction(
+  RESRT_CLOSE_NEW_TWEET_DIALOG
+)
+

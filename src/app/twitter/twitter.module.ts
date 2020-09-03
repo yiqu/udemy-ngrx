@@ -8,6 +8,9 @@ import { TwitterCoreComponent } from './core/core.component';
 import { TweetDetailComponent } from './tweet-detail/detail.component';
 import { TweetDisplayComponent } from './tweet-display/display.component';
 import { PipeBundleModule } from '../shared/pipes/pipe-bundle.module';
+import { LoadingModule } from '../shared/loading/loading.module';
+import { CustomComponentsModule } from '../shared/custom-component.module';
+
 
 @NgModule({
 
@@ -17,6 +20,8 @@ import { PipeBundleModule } from '../shared/pipes/pipe-bundle.module';
     ReactiveFormsModule,
     MaterialModuleBundle,
     PipeBundleModule,
+    LoadingModule,
+    CustomComponentsModule,
     TwitterRoutingModule
   ],
 

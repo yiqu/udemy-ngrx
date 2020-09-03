@@ -1,0 +1,21 @@
+<div class="alert alert-info" role="alert" *ngIf="this.ts.addingNewTweet$ | async">
+  Tweeting, please wait...
+</div>
+
+<h1 mat-dialog-title>Compose a new Tweet</h1>
+
+<div mat-dialog-content [formGroup]="tweetFg">
+  <mat-form-field class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="userName" cdkFocusInitial>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Say something...</mat-label>
+    <textarea matInput placeholder="Ex. Today I went to..." formControlName="content"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()" class="mr-3">Cancel</button>
+  <button mat-button (click)="onTweet()" [disabled]="!this.tweetFg.valid || (this.ts.addingNewTweet$ | async)">Submit</button>
+</div>

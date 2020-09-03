@@ -18,6 +18,9 @@ export interface TweetEntityState extends EntityState<Tweet> {
   error: boolean,
   errorMsg: string,
   loading: boolean,
+  hasDataLoadedAlready: boolean,
+  addingNewTweet: boolean,
+  closeTweetDialogTime: number
 }
 
 
@@ -60,6 +63,9 @@ export const initialTweetState = adapter.getInitialState({
   error: false,
   errorMsg: null,
   lastUpdated: 0,
+  hasDataLoadedAlready: false,
+  addingNewTweet: false,
+  closeTweetDialogTime: 0
 });
 
 
@@ -107,12 +113,38 @@ export const tweetsEntityReducer = createReducer(
       loading: false,
       error: false,
       errorMsg: null,
-      lastUpdated: dateTime
+      lastUpdated: dateTime,
+      hasDataLoadedAlready: true
     });
   }),
 
+  // on(TweetActions.postTweetStart, (state, { tweetToPost }) => {
+  //   return adapter.upsertOne(tweetToPost, state);
+  // }),
+
   on(TweetActions.postTweetStart, (state, { tweetToPost }) => {
-    return adapter.upsertOne(tweetToPost, state);
+    return  {
+      ...state,
+      error: false,
+      errorMsg: null,
+      addingNewTweet: true
+    }
+  }),
+
+  on(TweetActions.postTweetSuccess, (state, { tweetPosted }) => {
+    console.log(tweetPosted)
+    return  {
+      ...state,
+      addingNewTweet: false,
+      closeTweetDialogTime: new Date().getTime()
+    }
+  }),
+
+  on(TweetActions.resetCloseDialogTime, (state) => {
+    return {
+      ...state,
+      closeTweetDialogTime: 0
+    }
   }),
 
   on(TweetActions.editTweetStart, (state, { update }) => {

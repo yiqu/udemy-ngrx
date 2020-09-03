@@ -1,18 +1,41 @@
 <div class="row my-3 text-center">
   <div class="col-sm-12 tfont">
-    Tweet Wall
+    <div class="title-row">
+      Tweet Wall
+      <ng-container *ngIf="(this.ts.totalTweetCount$ | async) as totalCount">
+        <span class="ml-1 mr-2">({{totalCount}})</span>
+      </ng-container>
+      <button mat-mini-fab color="primary" (click)="onRefresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <div class="sub-row" >
+      <div *ngIf="(this.ts.lastUpdated$ |  async) as time" [@fadeInDownOnEnter] [@fadeOutDownOnLeave]>
+        Last updated: {{time | dateDisplay:'FULLDATE'}}
+      </div>
+    </div>
   </div>
 </div>
 
-<ng-container *ngIf="(this.ts.allTweets$ | async) as tweets">
-  <ng-container *ngIf="tweets.length < 1">
-    <div class="row text-center">
-      <div class="col-sm-12">
-        There no tweets yet, post one instead!
-      </div>
-    </div>
-  </ng-container>
-  <ng-container *ngFor="let tweet of tweets">
-    <app-twitter-tweet-display [tweetData]="tweet" (tweetEdit)="onEditTweet($event)"></app-twitter-tweet-display>
-  </ng-container>
+<ng-container *ngIf="(this.ts.loadingMask$ | async); else wallContent">
+  <div class="mt-5">
+    <app-shared-loading></app-shared-loading>
+  </div>
 </ng-container>
+
+<ng-template #wallContent>
+  <ng-container *ngIf="(this.ts.allTweets$ | async) as tweets">
+    <ng-container *ngIf="tweets.length < 1">
+      <div class="row text-center">
+        <div class="col-sm-12">
+          There no tweets yet, post one instead!
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let tweet of tweets">
+      <app-twitter-tweet-display [tweetData]="tweet" (tweetEdit)="onEditTweet($event)"
+        [@fadeInOnEnter] [@fadeOutOnLeave]></app-twitter-tweet-display>
+    </ng-container>
+  </ng-container>
+</ng-template>
+

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Data } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Tweet } from '../shared/models/tweet.model';
 import { Store } from '@ngrx/store';
-import * as fromTweetSelectors from '../ngrx-stores/tweets/tweets.selector';
+import * as fromTweetSelectors from '../ngrx-stores/tweets/tweets-entity.selector';
 
 
 @Component({
